@@ -17,12 +17,14 @@ const categoriesRouter = require("./routers/categoriesRouter");
 const AppErrors = require("./utils/appErrors");
 const globalErrorHandler = require("./middleware/errorMiddleware");
 const app = express();
+app.set('trust proxy', true);
 
 
 app.use(
-    cors()
-); // use CORS middleware
-
+    cors({
+        // origin: "*"
+    })
+);
 
 // set security HTTP headers like
 app.use(helmet());
@@ -43,6 +45,9 @@ app.use(xss());
 app.use(
     hpp()
 );
+
+
+
 
 app.use(
     rateLimit({
