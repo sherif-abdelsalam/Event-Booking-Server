@@ -18,6 +18,12 @@ const AppErrors = require("./utils/appErrors");
 const globalErrorHandler = require("./middleware/errorMiddleware");
 const app = express();
 
+
+app.use(
+    cors()
+); // use CORS middleware
+
+
 // set security HTTP headers like
 app.use(helmet());
 
@@ -25,13 +31,6 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-app.use(
-    cors({
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-        credentials: true
-    })
-); // use CORS middleware
 
 app.use(express.json({ limit: "10kb" }));
 
